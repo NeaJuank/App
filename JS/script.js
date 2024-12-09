@@ -114,30 +114,3 @@ document.addEventListener('DOMContentLoaded', () => {
         taskTime.value = '';
     }
 });
-document.getElementById('backToLogin').addEventListener('click', () => {
-    window.location.href = 'index.html';
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('loginForm');
-    const validUsername = "admin"; // Usuario válido
-    const validPassword = "12345"; // Contraseña válida
-
-    // Interceptar el submit del formulario
-    loginForm.addEventListener('submit', (event) => {
-        event.preventDefault(); // Evitar que se envíe el formulario
-
-        const username = document.getElementById('loginUsername').value;
-        const password = document.getElementById('loginPassword').value;
-
-        // Validar credenciales
-        if (username === validUsername && password === validPassword) {
-            // Redirigir si las credenciales son correctas
-            window.location.href = 'App/gestor_tareas.html';
-        } else {
-            // Si las credenciales son incorrectas, muestra un mensaje de error
-            alert('Usuario o contraseña incorrectos.');
-        }
-    });
-});

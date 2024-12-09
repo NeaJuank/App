@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de sesión</title>
-    <link rel="stylesheet" href="../gestor_tareas.html">
     <link rel="stylesheet" href="../CSS/login.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -14,12 +13,7 @@
             <div class="col-md-6">
                 <div class="card shadow-sm">
                     <div class="card-body">
-<<<<<<< HEAD:index.html
                         <h3 class="card-title text-center">Iniciar Sesión</h3>
-                        
-=======
-                        <h3 class="card-title text-center">Inicio de sesión</h3>
->>>>>>> 666147205f280ef9697d097d3ae72c1d87a9c2b8:LOGIN/login.html
                         <form id="loginForm">
                             <div class="mb-3">
                                 <label for="loginUsername" class="form-label">Usuario</label>
@@ -33,20 +27,49 @@
                                 <button type="submit" class="btn btn-primary">Iniciar sesión</button>
                             </div>
                         </form>
-                        
                         <hr>
-<<<<<<< HEAD:index.html
-                        <a href="register.html" class="btn btn-link w-100"id="registerBtn">Crear una cuenta</a>
-
-=======
                         <button class="btn btn-link w-100" id="goToRegister">¿No tienes cuenta? Regístrate</button>
->>>>>>> 666147205f280ef9697d097d3ae72c1d87a9c2b8:LOGIN/login.html
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="JS/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('loginForm');
+            const goToRegister = document.getElementById('goToRegister');
+
+            function getUsers() {
+                const users = localStorage.getItem('users');
+                return users ? JSON.parse(users) : [];
+            }
+
+            if (loginForm) {
+                loginForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+
+                    const username = document.getElementById('loginUsername').value;
+                    const password = document.getElementById('loginPassword').value;
+
+                    const users = getUsers();
+                    const validUser = users.find(user => user.username === username && user.password === password);
+
+                    if (validUser) {
+                        alert(`Bienvenido, ${username}!`);
+                        window.location.href = 'App/gestor_tareas.html'; // Redirige al gestor de tareas
+                    } else {
+                        alert('Usuario o contraseña incorrectos.');
+                    }
+                });
+            }
+
+            if (goToRegister) {
+                goToRegister.addEventListener('click', () => {
+                    window.location.href = 'register.html'; // Redirige al registro
+                });
+            }
+        });
+    </script>
 </body>
 </html>
