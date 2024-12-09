@@ -10,10 +10,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const deleteTaskBtn = document.getElementById('deleteTaskBtn');
     const completeTaskBtn = document.getElementById('completeTaskBtn');
     const toggleModeBtn = document.getElementById('toggleModeBtn');
-
+    
     let tasks = [];
     let editingTaskIndex = null;
     let isDarkMode = false;
+
+    // Verificar si el usuario ha iniciado sesión al cargar la página de tareas
+    if (window.location.pathname.includes('gestor_tareas.html')) {
+        const currentUser = localStorage.getItem('currentUser');
+        if (!currentUser) {
+            // Si no hay usuario en el localStorage, redirigir a login
+            window.location.href = 'login.html';
+        }
+    }
 
     // Alternar modo claro/oscuro
     toggleModeBtn.addEventListener('click', () => {
@@ -82,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tasks.forEach((task, index) => {
             const li = document.createElement('li');
             li.classList.add('list-group-item');
-            li.innerHTML = `
+            li.innerHTML = ` 
                 <strong>[${task.category}] ${task.description}</strong><br>
                 Fecha: ${task.date} - Hora: ${task.time} - Repetición: ${task.repetition}<br>
                 ${task.completed ? '<span class="text-success">Completada</span>' : ''}
@@ -114,6 +123,49 @@ document.addEventListener('DOMContentLoaded', () => {
         taskRepetition.value = '';
         taskDate.value = '';
         taskTime.value = '';
+    }
+
+    // Registro: Guardar credenciales en localStorage
+    if (window.location.pathname.includes('register.html')) {
+        const registerBtn = document.getElementById('registerBtn');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+
+        registerBtn.addEventListener('click', () => {
+            const username = usernameInput.value;
+            const password = passwordInput.value;
+
+            if (username && password) {
+                localStorage.setItem('username', username);
+                localStorage.setItem('password', password);
+                // Redirigir a login después de registrarse
+                window.location.href = 'login.html';
+            } else {
+                alert('Por favor, ingresa todos los campos.');
+            }
+        });
+    }
+
+    // Inicio de sesión: Verificar las credenciales
+    if (window.location.pathname.includes('login.html')) {
+        const loginBtn = document.getElementById('loginBtn');
+        const loginUsername = document.getElementById('loginUsername');
+        const loginPassword = document.getElementById('loginPassword');
+
+        loginBtn.addEventListener('click', () => {
+            const username = loginUsername.value;
+            const password = loginPassword.value;
+            const storedUsername = localStorage.getItem('username');
+            const storedPassword = localStorage.getItem('password');
+
+            if (username === storedUsername && password === storedPassword) {
+                // Al iniciar sesión, guardar el usuario actual en localStorage
+                localStorage.setItem('currentUser', username);
+                window.location.href = 'gestor_tareas.html';
+            } else {
+                alert('Credenciales incorrectas.');
+            }
+        });
     }
 });
 document.getElementById('backToLogin').addEventListener('click', () => {

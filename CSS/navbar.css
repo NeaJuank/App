@@ -1,0 +1,102 @@
+/* navbar.css */
+
+/* Fijar la barra de navegación en la parte superior */
+nav.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10; /* Asegura que la navbar esté por encima de otros elementos */
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo semi-transparente */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra debajo */
+}
+
+/* Estilo de los enlaces dentro de la navbar */
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #f0e68c; /* Color al pasar el ratón */
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: linear-gradient(90deg, #2e8b57, #3cb371);
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .navbar-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .navbar-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar-links li {
+    text-transform: uppercase;
+  }
+  
+  .navbar-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-links a:hover {
+    color: #f0e68c;
+  }
+  
+  .navbar-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .navbar-login,
+  .navbar-signup {
+    padding: 0.5rem 1rem;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navbar-login {
+    background-color: #228b22;
+  }
+  
+  .navbar-login:hover {
+    background-color: #6b8e23;
+  }
+  
+  .navbar-signup {
+    background-color: #f0e68c;
+    color: #2e8b57;
+  }
+  
+  .navbar-signup:hover {
+    background-color: #ffd700;
+    color: #3cb371;
+  }
+  
