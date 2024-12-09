@@ -8,37 +8,49 @@
 </head>
 <body class="bg-light">
 
-    <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Gestor de Tareas</a>
-<<<<<<< HEAD
-=======
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-<<<<<<< HEAD
-                        <a class="nav-link active" aria-current="page" href="login.html">Inicio</a>
-=======
-                        <a class="nav-link active" aria-current="page" href="HOME/home.html">Inicio</a>
->>>>>>> ff62b91816e01a8ffce3a5a22f1f00c5bc07f3e3
+                        <!-- No usas el href, solo agregarás un id para manejarlo con JS -->
+                        <button class="nav-link active" id="goToLogin" aria-current="page">Inicio</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="REGISTER/register.html">Registrar</a>
+                        <!-- No usas el href, solo agregarás un id para manejarlo con JS -->
+                        <button class="nav-link" id="goToRegister">Registrar</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="LOGIN/login.html">Iniciar Sesion</a>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="#">Acerca de</a>
                     </li>
                 </ul>
             </div>
->>>>>>> 1aab611d38d2a2ebc34ea2f4ceb2db4952b6e2c6
         </div>
     </nav>
+    
+    <!-- Script JS -->
+    <script>
+        // Obtén los botones por sus IDs
+        const goToLogin = document.getElementById('goToLogin');
+        const goToRegister = document.getElementById('goToRegister');
+    
+        // Agrega el evento de clic para redirigir a login.html
+        goToLogin.addEventListener('click', () => {
+            window.location.href = 'App/html/login.html';  // Ajusta la ruta según sea necesario
+        });
+    
+        // Agrega el evento de clic para redirigir a register.html
+        goToRegister.addEventListener('click', () => {
+            window.location.href = 'App/html/register.html';  // Ajusta la ruta según sea necesario
+        });
+    </script>
+    
+    
+    
 
     <!-- Contenido principal -->
     <div class="container mt-5">
@@ -105,129 +117,144 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const taskDescription = document.getElementById('taskDescription');
-            const taskCategory = document.getElementById('taskCategory');
-            const taskDate = document.getElementById('taskDate');
-            const taskTime = document.getElementById('taskTime');
-            const taskList = document.getElementById('taskList');
-            const addTaskBtn = document.getElementById('addTaskBtn');
-            const editTaskBtn = document.getElementById('editTaskBtn');
-            const deleteTaskBtn = document.getElementById('deleteTaskBtn');
-            const completeTaskBtn = document.getElementById('completeTaskBtn');
-            const filterCategory = document.getElementById('filterCategory');
-            const filterStatus = document.getElementById('filterStatus');
+        
+    document.addEventListener('DOMContentLoaded', () => {
+    const taskDescription = document.getElementById('taskDescription');
+    const taskCategory = document.getElementById('taskCategory');
+    const taskDate = document.getElementById('taskDate');
+    const taskTime = document.getElementById('taskTime');
+    const taskList = document.getElementById('taskList');
+    const addTaskBtn = document.getElementById('addTaskBtn');
+    const editTaskBtn = document.getElementById('editTaskBtn');
+    const deleteTaskBtn = document.getElementById('deleteTaskBtn');
+    const completeTaskBtn = document.getElementById('completeTaskBtn');
+    const filterCategory = document.getElementById('filterCategory');
+    const filterStatus = document.getElementById('filterStatus');
 
-            let tasks = [];
-            let selectedTaskIndex = null;
+    const goToLogin = document.getElementById('goToLogin');
+    const goToRegister = document.getElementById('goToRegister');
 
-            // Añadir tarea
-            addTaskBtn.addEventListener('click', () => {
-                const description = taskDescription.value;
-                const category = taskCategory.value;
-                const date = taskDate.value;
-                const time = taskTime.value;
+    let tasks = [];
+    let selectedTaskIndex = null;
 
-                if (description && date && time) {
-                    tasks.push({ description, category, date, time, completed: false });
-                    updateTaskList();
-                    clearInputs();
-                } else {
-                    alert('Por favor, complete todos los campos.');
-                }
-            });
+    // Redirigir a login.html
+    goToLogin.addEventListener('click', () => {
+        window.location.href = '../login.html';  // Ajusta la ruta según sea necesario
+    });
 
-            // Actualizar la lista de tareas con los filtros aplicados
-            function updateTaskList() {
-                const selectedCategory = filterCategory.value;
-                const selectedStatus = filterStatus.value;
+    // Redirigir a register.html
+    goToRegister.addEventListener('click', () => {
+        window.location.href = '../register.html';  // Ajusta la ruta según sea necesario
+    });
 
-                taskList.innerHTML = '';
-                tasks.forEach((task, index) => {
-                    const matchesCategory = selectedCategory === 'All' || task.category === selectedCategory;
-                    const matchesStatus = selectedStatus === 'All' || 
-                                          (selectedStatus === 'Pending' && !task.completed) || 
-                                          (selectedStatus === 'Completed' && task.completed);
+    // Añadir tarea
+    addTaskBtn.addEventListener('click', () => {
+        const description = taskDescription.value;
+        const category = taskCategory.value;
+        const date = taskDate.value;
+        const time = taskTime.value;
 
-                    if (matchesCategory && matchesStatus) {
-                        const li = document.createElement('li');
-                        li.classList.add('list-group-item');
-                        li.classList.toggle('list-group-item-success', task.completed);
-                        li.innerHTML = `
-                            <strong>${task.category}</strong>: ${task.description}<br>
-                            <small>Fecha: ${task.date} - Hora: ${task.time}</small>
-                        `;
-                        li.addEventListener('click', () => selectTask(index));
-                        taskList.appendChild(li);
-                    }
-                });
-                resetButtons();
-            }
+        if (description && date && time) {
+            tasks.push({ description, category, date, time, completed: false });
+            updateTaskList();
+            clearInputs();
+        } else {
+            alert('Por favor, complete todos los campos.');
+        }
+    });
 
-            // Seleccionar tarea
-            function selectTask(index) {
-                selectedTaskIndex = index;
-                const task = tasks[index];
-                taskDescription.value = task.description;
-                taskCategory.value = task.category;
-                taskDate.value = task.date;
-                taskTime.value = task.time;
+    // Actualizar la lista de tareas con los filtros aplicados
+    function updateTaskList() {
+        const selectedCategory = filterCategory.value;
+        const selectedStatus = filterStatus.value;
 
-                editTaskBtn.disabled = false;
-                deleteTaskBtn.disabled = false;
-                completeTaskBtn.disabled = task.completed; // Solo habilitar si no está completada
-            }
+        taskList.innerHTML = '';
+        tasks.forEach((task, index) => {
+            const matchesCategory = selectedCategory === 'All' || task.category === selectedCategory;
+            const matchesStatus = selectedStatus === 'All' || 
+                                  (selectedStatus === 'Pending' && !task.completed) || 
+                                  (selectedStatus === 'Completed' && task.completed);
 
-            // Editar tarea
-            editTaskBtn.addEventListener('click', () => {
-                if (selectedTaskIndex !== null) {
-                    const task = tasks[selectedTaskIndex];
-                    task.description = taskDescription.value;
-                    task.category = taskCategory.value;
-                    task.date = taskDate.value;
-                    task.time = taskTime.value;
-                    updateTaskList();
-                    clearInputs();
-                }
-            });
-
-            // Eliminar tarea
-            deleteTaskBtn.addEventListener('click', () => {
-                if (selectedTaskIndex !== null) {
-                    tasks.splice(selectedTaskIndex, 1);
-                    updateTaskList();
-                    clearInputs();
-                }
-            });
-
-            // Completar tarea
-            completeTaskBtn.addEventListener('click', () => {
-                if (selectedTaskIndex !== null) {
-                    tasks[selectedTaskIndex].completed = true;
-                    updateTaskList();
-                    clearInputs();
-                }
-            });
-
-            // Filtros
-            filterCategory.addEventListener('change', updateTaskList);
-            filterStatus.addEventListener('change', updateTaskList);
-
-            // Limpiar entradas
-            function clearInputs() {
-                taskDescription.value = '';
-                taskCategory.value = 'General';
-                taskDate.value = '';
-                taskTime.value = '';
-            }
-
-            // Resetear botones
-            function resetButtons() {
-                editTaskBtn.disabled = true;
-                deleteTaskBtn.disabled = true;
-                completeTaskBtn.disabled = true;
+            if (matchesCategory && matchesStatus) {
+                const li = document.createElement('li');
+                li.classList.add('list-group-item');
+                li.classList.toggle('list-group-item-success', task.completed);
+                li.innerHTML = `
+                    <strong>${task.category}</strong>: ${task.description}<br>
+                    <small>Fecha: ${task.date} - Hora: ${task.time}</small>
+                `;
+                li.addEventListener('click', () => selectTask(index));
+                taskList.appendChild(li);
             }
         });
+        resetButtons();
+    }
+
+    // Seleccionar tarea
+    function selectTask(index) {
+        selectedTaskIndex = index;
+        const task = tasks[index];
+        taskDescription.value = task.description;
+        taskCategory.value = task.category;
+        taskDate.value = task.date;
+        taskTime.value = task.time;
+
+        editTaskBtn.disabled = false;
+        deleteTaskBtn.disabled = false;
+        completeTaskBtn.disabled = task.completed; // Solo habilitar si no está completada
+    }
+
+    // Editar tarea
+    editTaskBtn.addEventListener('click', () => {
+        if (selectedTaskIndex !== null) {
+            const task = tasks[selectedTaskIndex];
+            task.description = taskDescription.value;
+            task.category = taskCategory.value;
+            task.date = taskDate.value;
+            task.time = taskTime.value;
+            updateTaskList();
+            clearInputs();
+        }
+    });
+
+    // Eliminar tarea
+    deleteTaskBtn.addEventListener('click', () => {
+        if (selectedTaskIndex !== null) {
+            tasks.splice(selectedTaskIndex, 1);
+            updateTaskList();
+            clearInputs();
+        }
+    });
+
+    // Completar tarea
+    completeTaskBtn.addEventListener('click', () => {
+        if (selectedTaskIndex !== null) {
+            tasks[selectedTaskIndex].completed = true;
+            updateTaskList();
+            clearInputs();
+        }
+    });
+
+    // Filtros
+    filterCategory.addEventListener('change', updateTaskList);
+    filterStatus.addEventListener('change', updateTaskList);
+
+    // Limpiar entradas
+    function clearInputs() {
+        taskDescription.value = '';
+        taskCategory.value = 'General';
+        taskDate.value = '';
+        taskTime.value = '';
+    }
+
+    // Resetear botones
+    function resetButtons() {
+        editTaskBtn.disabled = true;
+        deleteTaskBtn.disabled = true;
+        completeTaskBtn.disabled = true;
+    }
+});
+
     </script>
 </body>
 </html>
