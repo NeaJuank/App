@@ -118,7 +118,7 @@
 
     <script>
         
-    document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
     const taskDescription = document.getElementById('taskDescription');
     const taskCategory = document.getElementById('taskCategory');
     const taskDate = document.getElementById('taskDate');
@@ -131,21 +131,30 @@
     const filterCategory = document.getElementById('filterCategory');
     const filterStatus = document.getElementById('filterStatus');
 
-    const goToLogin = document.getElementById('goToLogin');
-    const goToRegister = document.getElementById('goToRegister');
-
     let tasks = [];
     let selectedTaskIndex = null;
 
-    // Redirigir a login.html
-    goToLogin.addEventListener('click', () => {
-        window.location.href = '../login.html';  // Ajusta la ruta según sea necesario
-    });
+    // Solicitar permiso para mostrar notificaciones
+    if (Notification.permission !== 'granted') {
+        Notification.requestPermission();
+    }
 
-    // Redirigir a register.html
-    goToRegister.addEventListener('click', () => {
-        window.location.href = '../register.html';  // Ajusta la ruta según sea necesario
-    });
+    // Función para mostrar una notificación
+    function showNotification(message) {
+        if (Notification.permission === 'granted') {
+            const notification = new Notification('Nueva Tarea', {
+                body: message,
+                icon: 'icon.png',
+                badge: 'icon.png',
+            });
+        }
+    }
+
+    // Función para reproducir sonido
+    function playAlarmSound() {
+        const audio = new Audio('alarm_sound.mp3'); // Asegúrate de tener este archivo de sonido en tu proyecto
+        audio.play();
+    }
 
     // Añadir tarea
     addTaskBtn.addEventListener('click', () => {
@@ -155,7 +164,22 @@
         const time = taskTime.value;
 
         if (description && date && time) {
-            tasks.push({ description, category, date, time, completed: false });
+            const taskDateTime = new Date(date + ' ' + time); // Crear la fecha con la hora de la tarea
+            tasks.push({ description, category, date, time, completed: false, taskDateTime });
+
+            // Calcular la diferencia entre la hora de la tarea y la hora actual
+            const now = new Date();
+            const timeToWait = taskDateTime - now;
+
+            if (timeToWait > 0) {
+                setTimeout(() => {
+                    showNotification(`¡Es hora de tu tarea! ${description}`);
+                    playAlarmSound();
+                }, timeToWait);
+            } else {
+                alert('La hora de la tarea ya pasó.');
+            }
+
             updateTaskList();
             clearInputs();
         } else {
@@ -213,6 +237,7 @@
             task.date = taskDate.value;
             task.time = taskTime.value;
             updateTaskList();
+            showNotification(`Tarea actualizada: ${task.description}`);
             clearInputs();
         }
     });
@@ -220,8 +245,10 @@
     // Eliminar tarea
     deleteTaskBtn.addEventListener('click', () => {
         if (selectedTaskIndex !== null) {
+            const task = tasks[selectedTaskIndex];
             tasks.splice(selectedTaskIndex, 1);
             updateTaskList();
+            showNotification(`Tarea eliminada: ${task.description}`);
             clearInputs();
         }
     });
@@ -231,6 +258,7 @@
         if (selectedTaskIndex !== null) {
             tasks[selectedTaskIndex].completed = true;
             updateTaskList();
+            showNotification(`Tarea completada: ${tasks[selectedTaskIndex].description}`);
             clearInputs();
         }
     });
@@ -254,6 +282,7 @@
         completeTaskBtn.disabled = true;
     }
 });
+
 
     </script>
 </body>
