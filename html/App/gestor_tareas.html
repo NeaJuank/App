@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestor de Tareas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="CSS/gestor_tareas.css">
-    <link rel="stylesheet" href="CSS/navbar.css">
 </head>
 <body class="bg-light">
 
@@ -14,28 +12,6 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Gestor de Tareas</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-<<<<<<< HEAD
-                        <a class="nav-link active" aria-current="page" href="login.html">Inicio</a>
-=======
-                        <a class="nav-link active" aria-current="page" href="HOME/home.html">Inicio</a>
->>>>>>> ff62b91816e01a8ffce3a5a22f1f00c5bc07f3e3
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="REGISTER/register.html">Registrar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="LOGIN/login.html">Iniciar Sesion</a>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Acerca de</a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </nav>
 
@@ -48,7 +24,7 @@
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="taskDescription" class="form-label">Descripción de la tarea:</label>
-                    <textarea id="taskDescription" class="form-control" rows="3" placeholder="Descripción de la tarea"></textarea>
+                    <textarea id="taskDescription" class="form-control" rows="2" placeholder="Descripción de la tarea"></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="taskCategory" class="form-label">Categoría:</label>
@@ -60,134 +36,171 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="taskRepetition" class="form-label">Repetición:</label>
-                    <input type="text" id="taskRepetition" class="form-control" placeholder="Repetir (opcional)">
-                </div>
-                <div class="mb-3">
-                    <label for="taskDate" class="form-label">Seleccionar Fecha:</label>
+                    <label for="taskDate" class="form-label">Fecha:</label>
                     <input type="date" id="taskDate" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="taskTime" class="form-label">Hora (HH:MM):</label>
+                    <label for="taskTime" class="form-label">Hora:</label>
                     <input type="time" id="taskTime" class="form-control">
                 </div>
+
                 <button class="btn btn-primary" id="addTaskBtn">Añadir Tarea</button>
                 <button class="btn btn-secondary" id="editTaskBtn" disabled>Editar Tarea</button>
                 <button class="btn btn-danger" id="deleteTaskBtn" disabled>Eliminar Tarea</button>
                 <button class="btn btn-success" id="completeTaskBtn" disabled>Completar Tarea</button>
-                <button class="btn btn-dark mt-3" id="toggleModeBtn">Alternar Modo Claro/Oscuro</button>
             </div>
         </div>
 
-        <!-- Visualización de Tareas -->
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-8">
-                <h4 class="text-center mb-3">Lista de Tareas</h4>
-                <div class="d-flex justify-content-between mb-3">
-                    <div>
-                        <label for="filterCategory" class="form-label me-2">Filtrar por Categoría:</label>
-                        <select id="filterCategory" class="form-select d-inline w-auto">
-                            <option value="Todas">Todas</option>
-                            <option value="General">General</option>
-                            <option value="Trabajo">Trabajo</option>
-                            <option value="Estudio">Estudio</option>
-                            <option value="Personal">Personal</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="filterStatus" class="form-label me-2">Filtrar por Estado:</label>
-                        <select id="filterStatus" class="form-select d-inline w-auto">
-                            <option value="Todos">Todos</option>
-                            <option value="Completadas">Completadas</option>
-                            <option value="Pendientes">Pendientes</option>
-                        </select>
-                    </div>
-                </div>
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Descripción</th>
-                            <th>Categoría</th>
-                            <th>Fecha</th>
-                            <th>Hora</th>
-                            <th>Repetición</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="taskTableBody"></tbody>
-                </table>
+        <!-- Filtros -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <label for="filterCategory" class="form-label">Filtrar por categoría:</label>
+                <select id="filterCategory" class="form-select mb-3">
+                    <option value="All">Todas</option>
+                    <option value="General">General</option>
+                    <option value="Trabajo">Trabajo</option>
+                    <option value="Estudio">Estudio</option>
+                    <option value="Personal">Personal</option>
+                </select>
+                <label for="filterStatus" class="form-label">Filtrar por estado:</label>
+                <select id="filterStatus" class="form-select">
+                    <option value="All">Todas</option>
+                    <option value="Pending">Pendientes</option>
+                    <option value="Completed">Completadas</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Lista de Tareas -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <ul class="list-group" id="taskList"></ul>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const taskDescription = document.getElementById('taskDescription');
             const taskCategory = document.getElementById('taskCategory');
-            const taskRepetition = document.getElementById('taskRepetition');
             const taskDate = document.getElementById('taskDate');
             const taskTime = document.getElementById('taskTime');
-            const taskTableBody = document.getElementById('taskTableBody');
-            const filterCategory = document.getElementById('filterCategory');
-            const filterStatus = document.getElementById('filterStatus');
+            const taskList = document.getElementById('taskList');
             const addTaskBtn = document.getElementById('addTaskBtn');
             const editTaskBtn = document.getElementById('editTaskBtn');
             const deleteTaskBtn = document.getElementById('deleteTaskBtn');
             const completeTaskBtn = document.getElementById('completeTaskBtn');
-            const toggleModeBtn = document.getElementById('toggleModeBtn');
+            const filterCategory = document.getElementById('filterCategory');
+            const filterStatus = document.getElementById('filterStatus');
 
             let tasks = [];
-            let editingTaskIndex = null;
-            let isDarkMode = false;
+            let selectedTaskIndex = null;
 
-            toggleModeBtn.addEventListener('click', () => {
-                isDarkMode = !isDarkMode;
-                document.body.classList.toggle('bg-dark', isDarkMode);
-                document.body.classList.toggle('text-white', isDarkMode);
-            });
-
+            // Añadir tarea
             addTaskBtn.addEventListener('click', () => {
                 const description = taskDescription.value;
                 const category = taskCategory.value;
-                const repetition = taskRepetition.value || 'No se repite';
                 const date = taskDate.value;
                 const time = taskTime.value;
 
                 if (description && date && time) {
-                    const task = { description, category, repetition, date, time, completed: false };
-                    tasks.push(task);
-                    updateTaskTable();
+                    tasks.push({ description, category, date, time, completed: false });
+                    updateTaskList();
                     clearInputs();
                 } else {
-                    alert('Por favor, complete todos los campos requeridos.');
+                    alert('Por favor, complete todos los campos.');
                 }
             });
 
-            function updateTaskTable() {
-                taskTableBody.innerHTML = '';
-                tasks.forEach((task) => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${task.description}</td>
-                        <td>${task.category}</td>
-                        <td>${task.date}</td>
-                        <td>${task.time}</td>
-                        <td>${task.repetition}</td>
-                        <td>${task.completed ? 'Completada' : 'Pendiente'}</td>
-                    `;
-                    taskTableBody.appendChild(row);
+            // Actualizar la lista de tareas con los filtros aplicados
+            function updateTaskList() {
+                const selectedCategory = filterCategory.value;
+                const selectedStatus = filterStatus.value;
+
+                taskList.innerHTML = '';
+                tasks.forEach((task, index) => {
+                    const matchesCategory = selectedCategory === 'All' || task.category === selectedCategory;
+                    const matchesStatus = selectedStatus === 'All' || 
+                                          (selectedStatus === 'Pending' && !task.completed) || 
+                                          (selectedStatus === 'Completed' && task.completed);
+
+                    if (matchesCategory && matchesStatus) {
+                        const li = document.createElement('li');
+                        li.classList.add('list-group-item');
+                        li.classList.toggle('list-group-item-success', task.completed);
+                        li.innerHTML = `
+                            <strong>${task.category}</strong>: ${task.description}<br>
+                            <small>Fecha: ${task.date} - Hora: ${task.time}</small>
+                        `;
+                        li.addEventListener('click', () => selectTask(index));
+                        taskList.appendChild(li);
+                    }
                 });
+                resetButtons();
             }
 
+            // Seleccionar tarea
+            function selectTask(index) {
+                selectedTaskIndex = index;
+                const task = tasks[index];
+                taskDescription.value = task.description;
+                taskCategory.value = task.category;
+                taskDate.value = task.date;
+                taskTime.value = task.time;
+
+                editTaskBtn.disabled = false;
+                deleteTaskBtn.disabled = false;
+                completeTaskBtn.disabled = task.completed; // Solo habilitar si no está completada
+            }
+
+            // Editar tarea
+            editTaskBtn.addEventListener('click', () => {
+                if (selectedTaskIndex !== null) {
+                    const task = tasks[selectedTaskIndex];
+                    task.description = taskDescription.value;
+                    task.category = taskCategory.value;
+                    task.date = taskDate.value;
+                    task.time = taskTime.value;
+                    updateTaskList();
+                    clearInputs();
+                }
+            });
+
+            // Eliminar tarea
+            deleteTaskBtn.addEventListener('click', () => {
+                if (selectedTaskIndex !== null) {
+                    tasks.splice(selectedTaskIndex, 1);
+                    updateTaskList();
+                    clearInputs();
+                }
+            });
+
+            // Completar tarea
+            completeTaskBtn.addEventListener('click', () => {
+                if (selectedTaskIndex !== null) {
+                    tasks[selectedTaskIndex].completed = true;
+                    updateTaskList();
+                    clearInputs();
+                }
+            });
+
+            // Filtros
+            filterCategory.addEventListener('change', updateTaskList);
+            filterStatus.addEventListener('change', updateTaskList);
+
+            // Limpiar entradas
             function clearInputs() {
                 taskDescription.value = '';
                 taskCategory.value = 'General';
-                taskRepetition.value = '';
                 taskDate.value = '';
                 taskTime.value = '';
+            }
+
+            // Resetear botones
+            function resetButtons() {
+                editTaskBtn.disabled = true;
+                deleteTaskBtn.disabled = true;
+                completeTaskBtn.disabled = true;
             }
         });
     </script>
