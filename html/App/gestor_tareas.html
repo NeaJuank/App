@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestor de Tareas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tkcalendar/css/tkcalendar.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/gestor_tareas.css">
+    <link rel="stylesheet" href="CSS/navbar.css">
 </head>
 <body class="bg-light">
 
@@ -17,6 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="HOME/home.html">Inicio</a>
                         <!-- No usas el href, solo agregarás un id para manejarlo con JS -->
                         <button class="nav-link active" id="goToLogin" aria-current="page">Inicio</button>
                     </li>
@@ -59,10 +63,13 @@
         <!-- Formulario de entrada de tareas -->
         <div class="row justify-content-center">
             <div class="col-md-6">
+                <!-- Descripción de la tarea -->
                 <div class="mb-3">
                     <label for="taskDescription" class="form-label">Descripción de la tarea:</label>
                     <textarea id="taskDescription" class="form-control" rows="2" placeholder="Descripción de la tarea"></textarea>
                 </div>
+
+                <!-- Categoría -->
                 <div class="mb-3">
                     <label for="taskCategory" class="form-label">Categoría:</label>
                     <select id="taskCategory" class="form-select">
@@ -72,19 +79,37 @@
                         <option value="Personal">Personal</option>
                     </select>
                 </div>
+
+                <!-- Repetición -->
                 <div class="mb-3">
+                    <label for="taskRepetition" class="form-label">Repetición:</label>
+                    <input type="text" id="taskRepetition" class="form-control" placeholder="Repetir (opcional)">
+                </div>
+
+                <!-- Seleccionar Fecha -->
+                <div class="mb-3">
+                    <label for="taskDate" class="form-label">Seleccionar Fecha:</label>
                     <label for="taskDate" class="form-label">Fecha:</label>
                     <input type="date" id="taskDate" class="form-control">
                 </div>
+
+                <!-- Hora -->
                 <div class="mb-3">
                     <label for="taskTime" class="form-label">Hora:</label>
                     <input type="time" id="taskTime" class="form-control">
                 </div>
 
+                <!-- Botones -->
                 <button class="btn btn-primary" id="addTaskBtn">Añadir Tarea</button>
                 <button class="btn btn-secondary" id="editTaskBtn" disabled>Editar Tarea</button>
                 <button class="btn btn-danger" id="deleteTaskBtn" disabled>Eliminar Tarea</button>
                 <button class="btn btn-success" id="completeTaskBtn" disabled>Completar Tarea</button>
+
+                <!-- Modo Claro/Oscuro -->
+                <button class="btn btn-dark mt-3" id="toggleModeBtn">Alternar Modo Claro/Oscuro</button>
+            </div>
+        </div>
+
             </div>
         </div>
 
@@ -116,6 +141,9 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/tkcalendar/js/tkcalendar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="JS/script.js"></script>
     <script>
         
         document.addEventListener('DOMContentLoaded', () => {

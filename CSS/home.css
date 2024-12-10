@@ -1,0 +1,94 @@
+/* Estilos generales */
+body {
+    background: linear-gradient(to bottom, #e8f5e9, #c8e6c9); /* Fondo verde suave */
+    font-family: 'Poppins', sans-serif;
+    color: #343a40;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+}
+
+.nav-link {
+    color: #f8f9fa !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffd700 !important; /* Dorado para resaltar */
+}
+
+/* Títulos */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1b5e20; /* Verde fuerte para resaltar el título */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1.5rem;
+}
+
+/* Contenedor de tarjetas */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    border-radius: 12px 12px 0 0;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.1);
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #2e7d32; /* Verde destacado */
+    margin-bottom: 0.5rem;
+}
+
+.card-text {
+    color: #6c757d;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Animaciones */
+.card:hover .card-body {
+    background: linear-gradient(135deg, #ffd700, #ff6f61);
+    color: white;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.card-title, .card-text {
+    transition: color 0.3s ease;
+}
+
+.card:hover .card-title, .card:hover .card-text {
+    color: white;
+}
