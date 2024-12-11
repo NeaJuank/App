@@ -20,9 +20,8 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="HOME/home.html">Inicio</a>
-                        <!-- No usas el href, solo agregarás un id para manejarlo con JS -->
-                        <button class="nav-link active" id="goToLogin" aria-current="page">Inicio</button>
+                        
+                        <button class="nav-link active" id="goToLogin" aria-current="page">Cerrar sesion</button>
                     </li>
                     <li class="nav-item">
                         <!-- No usas el href, solo agregarás un id para manejarlo con JS -->
@@ -44,12 +43,12 @@
     
         // Agrega el evento de clic para redirigir a login.html
         goToLogin.addEventListener('click', () => {
-            window.location.href = 'App/html/login.html';  // Ajusta la ruta según sea necesario
+            window.location.href = '../login.html';  // Ajusta la ruta según sea necesario
         });
     
         // Agrega el evento de clic para redirigir a register.html
         goToRegister.addEventListener('click', () => {
-            window.location.href = 'App/html/register.html';  // Ajusta la ruta según sea necesario
+            window.location.href = '../register.html';  // Ajusta la ruta según sea necesario
         });
     </script>
     
@@ -159,7 +158,7 @@
     const filterCategory = document.getElementById('filterCategory');
     const filterStatus = document.getElementById('filterStatus');
 
-    let tasks = [];
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];  // Cargar tareas del localStorage
     let selectedTaskIndex = null;
 
     // Solicitar permiso para mostrar notificaciones
@@ -193,7 +192,9 @@
 
         if (description && date && time) {
             const taskDateTime = new Date(date + ' ' + time); // Crear la fecha con la hora de la tarea
-            tasks.push({ description, category, date, time, completed: false, taskDateTime });
+            const newTask = { description, category, date, time, completed: false, taskDateTime };
+            tasks.push(newTask);
+            localStorage.setItem('tasks', JSON.stringify(tasks));  // Guardar tareas en localStorage
 
             // Calcular la diferencia entre la hora de la tarea y la hora actual
             const now = new Date();
@@ -264,6 +265,7 @@
             task.category = taskCategory.value;
             task.date = taskDate.value;
             task.time = taskTime.value;
+            localStorage.setItem('tasks', JSON.stringify(tasks));  // Guardar tareas en localStorage
             updateTaskList();
             showNotification(`Tarea actualizada: ${task.description}`);
             clearInputs();
@@ -275,6 +277,7 @@
         if (selectedTaskIndex !== null) {
             const task = tasks[selectedTaskIndex];
             tasks.splice(selectedTaskIndex, 1);
+            localStorage.setItem('tasks', JSON.stringify(tasks));  // Guardar tareas en localStorage
             updateTaskList();
             showNotification(`Tarea eliminada: ${task.description}`);
             clearInputs();
@@ -285,6 +288,7 @@
     completeTaskBtn.addEventListener('click', () => {
         if (selectedTaskIndex !== null) {
             tasks[selectedTaskIndex].completed = true;
+            localStorage.setItem('tasks', JSON.stringify(tasks));  // Guardar tareas en localStorage
             updateTaskList();
             showNotification(`Tarea completada: ${tasks[selectedTaskIndex].description}`);
             clearInputs();
@@ -309,6 +313,9 @@
         deleteTaskBtn.disabled = true;
         completeTaskBtn.disabled = true;
     }
+
+    // Cargar las tareas al inicio
+    updateTaskList();
 });
 
 
