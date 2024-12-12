@@ -1,6 +1,7 @@
 /* Estilos generales */
+
 body {
-    background: linear-gradient(to bottom, #e8f5e9, #c8e6c9); /* Fondo verde suave */
+    background: linear-gradient(to bottom, #e8f5e9, #c8e6c9);
     font-family: 'Poppins', sans-serif;
     color: #343a40;
     margin: 0;
@@ -8,9 +9,11 @@ body {
 }
 
 /* Navbar */
+
 .navbar {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-weight: bold;
+    background-color: #388e3c;
 }
 
 .nav-link {
@@ -19,25 +22,29 @@ body {
 }
 
 .nav-link:hover {
-    color: #ffd700 !important; /* Dorado para resaltar */
+    color: #ffd700 !important;
 }
 
 /* Títulos */
+
 h1 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #1b5e20; /* Verde fuerte para resaltar el título */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    color: #1b5e20;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 1.5rem;
+    text-align: center;
 }
 
 /* Contenedor de tarjetas */
+
 .card {
     border: none;
     border-radius: 12px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
+    background-color: #ffffff;
 }
 
 .card:hover {
@@ -48,26 +55,47 @@ h1 {
 .card-img-top {
     border-radius: 12px 12px 0 0;
     transition: transform 0.3s ease;
+    object-fit: cover;
+    height: 200px;
 }
 
 .card:hover .card-img-top {
     transform: scale(1.1);
 }
 
+.card-body {
+    padding: 20px;
+    transition: background-color 0.3s ease;
+}
+
 .card-title {
     font-size: 1.3rem;
     font-weight: bold;
-    color: #2e7d32; /* Verde destacado */
+    color: #2e7d32;
     margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
 }
 
 .card-text {
     color: #6c757d;
     font-size: 1rem;
     line-height: 1.5;
+    transition: color 0.3s ease;
+}
+
+/* Efectos hover sobre las tarjetas */
+
+.card:hover .card-body {
+    background: linear-gradient(135deg, #ffd700, #ff6f61);
+    color: white;
+}
+
+.card:hover .card-title, .card:hover .card-text {
+    color: white;
 }
 
 /* Responsivo */
+
 @media (max-width: 768px) {
     h1 {
         font-size: 2rem;
@@ -78,17 +106,88 @@ h1 {
     }
 }
 
-/* Animaciones */
-.card:hover .card-body {
-    background: linear-gradient(135deg, #ffd700, #ff6f61);
-    color: white;
-    transition: background 0.3s ease, color 0.3s ease;
+@media (max-width: 576px) {
+    .card {
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        margin-bottom: 0.2rem;
+    }
+}
+
+/* Animaciones y transiciones */
+
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
 .card-title, .card-text {
     transition: color 0.3s ease;
 }
 
-.card:hover .card-title, .card:hover .card-text {
+.card-body:hover {
+    background: linear-gradient(135deg, #ffd700, #ff6f61);
     color: white;
+}
+/* Ajustes para mejorar la visibilidad */
+
+.card-body {
+    background-color: #fafafa;
+}
+
+/* Agregar el efecto de desplazamiento de texto (opcional) */
+
+.card-text {
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-text {
+    transform: translateY(-5px);
+}
+
+/* Agregar sombra a los títulos (opcional) */
+
+.card-title {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Agregar efecto de transición a los enlaces (opcional) */
+
+.nav-link {
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffd700;
+    text-decoration: none;
+}
+
+/* Agregar efecto de transición a los botones (opcional) */
+
+.btn {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #ffd700;
+    color: white;
+}
+
+/* Agregar efecto de transición a los formularios (opcional) */
+
+.form-control {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #ffd700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }

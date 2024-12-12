@@ -11,6 +11,7 @@
 </head>
 <body class="bg-light">
 
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Gestor de Tareas</a>
@@ -20,15 +21,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        
-                        <button class="nav-link active" id="goToLogin" aria-current="page">Cerrar sesion</button>
+                        <button class="btn btn-link nav-link text-light" id="goToLogin">Cerrar sesión</button>
                     </li>
                     <li class="nav-item">
-                        <!-- No usas el href, solo agregarás un id para manejarlo con JS -->
-                        <button class="nav-link" id="goToRegister">Registrar</button>
+                        <button class="btn btn-link nav-link text-light" id="goToRegister">Registrar</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../../HOME/home.html">Home</a>
+                        <a class="nav-link" href="../../HOME/home.html">17 ODS</a>
                     </li>
                 </ul>
             </div>
@@ -113,16 +112,23 @@
         </div>
 
         <!-- Filtros -->
-        <div class="row justify-content-center mt-4">
-            <div class="col-md-6">
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <div class="row">
+            <!-- Filtro por categoría -->
+            <div class="col-12 col-sm-6 mb-3">
                 <label for="filterCategory" class="form-label">Filtrar por categoría:</label>
-                <select id="filterCategory" class="form-select mb-3">
+                <select id="filterCategory" class="form-select">
                     <option value="All">Todas</option>
                     <option value="General">General</option>
                     <option value="Trabajo">Trabajo</option>
                     <option value="Estudio">Estudio</option>
                     <option value="Personal">Personal</option>
                 </select>
+            </div>
+
+            <!-- Filtro por estado -->
+            <div class="col-12 col-sm-6 mb-3">
                 <label for="filterStatus" class="form-label">Filtrar por estado:</label>
                 <select id="filterStatus" class="form-select">
                     <option value="All">Todas</option>
@@ -131,14 +137,16 @@
                 </select>
             </div>
         </div>
+    </div>
+</div>
+
 
         <!-- Lista de Tareas -->
-        <div class="row justify-content-center mt-4">
-            <div class="col-md-6">
-                <ul class="list-group" id="taskList"></ul>
-            </div>
-        </div>
+<div class="row justify-content-center mt-4 mb-4">
+    <div class="col-md-6">
+        <ul class="list-group" id="taskList"></ul>
     </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/tkcalendar/js/tkcalendar.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -316,6 +324,13 @@
 
     // Cargar las tareas al inicio
     updateTaskList();
+    // Alternar modo claro/oscuro
+    let isDarkMode = false;
+    toggleModeBtn.addEventListener('click', () => {
+        isDarkMode = !isDarkMode;
+        document.body.classList.toggle('bg-dark', isDarkMode);
+        document.body.classList.toggle('text-white', isDarkMode);
+    });
 });
 
 
